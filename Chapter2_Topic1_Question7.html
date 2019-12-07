@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Question 7</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Confirm extends React.Component {
+        render() {
+          return <div>{message}</div>;
+        }
+      }; // single one js file
+
+      const confirm = message => React.lazy(() => import('./Confirm')); // not real code
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              Hello World!
+            </div>
+          );
+        }
+        async componentDidMount() {
+          let res = await confirm('Are you sure to delete?');
+          if (res) {
+            console.log('Yes');
+          } else {
+            console.log('No');
+          }
+        }
+      }
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>
 
